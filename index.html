@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEVinCompras</title>
+    <link rel="icon" type="image/x-icon" href="./favicon.ico">
+
+    <link rel="stylesheet" href="./css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&family=Nunito&family=Source+Sans+Pro&display=swap"
+        rel="stylesheet">
+</head>
+
+
+<body>
+    <header>
+        <nav><h1>DEVinCompras</h1></nav>
+    </header>
+
+    <main>
+        <form id="input-container">
+            <input type="text" id="input-text" placeholder="Adicione um item">
+            <button type="submit" id="add-button">Incluir</button>
+        </form>
+    
+        <div id="price-container" class="hidden"></div>
+    
+        <ul id="output-container"></ul>
+    
+        <div id="overlay" class="hidden"></div>
+    
+    </main>
+    
+    <script src="./js/main.js" type="module"></script>
+</body>
+
+</html>

@@ -1,0 +1,303 @@
+* {
+    margin: 0;
+	padding: 0;
+	border: 0;
+    font-family: 'Lato', sans-serif;
+}
+
+body {
+    background-color: #EEEEEE;
+}
+
+main {
+    max-width: 600px;
+    position: relative;
+    margin: 0 auto;
+    padding: 0 5%;
+}
+
+/* INÍCIO DA ESTILIZAÇÃO DA BARRA DE NAVEGAÇÃO */
+
+nav {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    background-color: #222831;
+    color: #EEEEEE;
+    box-shadow: 0 1px 1px 1px #000000;
+}
+
+nav h1 {
+    font-weight: 600;
+}
+
+
+/* FIM DA ESTILIZAÇÃO DA BARRA DE NAVEGAÇÃO */
+
+
+/* INÍCIO DA ESTILIZAÇÃO DA BARRA PARA INCLUIR ITEM NA LISTA */
+
+#input-container {
+    display: flex;
+    width:75%;
+    justify-content: center;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+#input-text {
+    flex-grow:4;
+    height:45px;
+    box-sizing: border-box;
+    background-color: #FFFFFF;;
+    border: 1px solid #393E46;
+    border-right:0;
+    color: #393E46;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 0 1.5em;
+}
+
+#input-text:focus {
+    outline: none;
+    border: 2px solid #393E46;
+}
+
+#add-button {
+    flex-grow:1;
+    height:45px;
+    box-sizing: border-box;
+    background-color: #393E46;
+    color:#EEEEEE;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 0 1.5em;
+}
+
+#add-button:hover {
+    cursor: pointer;
+}
+
+/* FIM DA ESTILIZAÇÃO DA BARRA PARA INCLUIR ITEM NA LISTA */
+
+/* INÍCIO DA ESTILIZAÇÃO DO CONTAINER COM O PREÇO TOTAL DA COMPRA */
+
+.price-container {
+    width: 150px;
+    height: 75px;
+    margin: 0 auto;
+    background-color: #DB413A;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    font-size: 14px;
+    color: #EEEEEE;
+    animation: 1s slide-in;
+    position: relative;
+    transition: all .75s ease;
+}
+
+@keyframes slide-in {
+    0% { height: 0px;};
+    100% { height: 75px;};
+}
+
+.slide-out {
+    height: 0;
+}
+
+#price {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+
+/* FIM DA DA ESTILIZAÇÃO DO CONTAINER COM O PREÇO TOTAL DA COMPRA */
+
+/* INÍCIO DA ESTILIZAÇÃO DA LISTA DE ITENS*/
+
+#output-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap:5px;
+}
+
+.list:first-child, .bought:first-child {
+    margin-top:10px;
+}
+
+.list {
+    display: flex;
+    position: relative;
+    list-style-type: none;
+    height:60px;
+    width:100%;
+    box-sizing: border-box;
+    border-radius:8px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    text-transform: uppercase;
+    font-size: 18px;
+    background: linear-gradient(30deg, #00ADB5 65%, #00B6BF 70%);
+    color: #EEEEEE;
+}
+
+.bought{
+    display: flex;
+    position: relative;
+    list-style-type: none;
+    height:60px;
+    width:100%;
+    box-sizing: border-box;
+    border-radius:8px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    text-transform: uppercase;
+    font-size: 18px;
+    background: linear-gradient(30deg, #393E46 60%, #40464f 65%);
+    color: #EEEEEE;
+}
+
+.bought > p {
+    text-decoration: line-through;
+}
+
+.bought > .checkbox:after {
+    content: 'X';
+}
+
+.checkbox {
+    position: absolute;
+    left: 20px;
+    background-color: #EEEEEE;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #393E46;
+    border-radius: 3px;
+    color:#222831;
+    text-align: center;
+    padding:0;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.checkbox:hover {
+    cursor: pointer;
+    background-color: #F8F8F8;
+    border-color: #222831;
+}
+
+.item-name:hover {
+    cursor:default;
+}
+
+.close {
+    position: absolute;
+    right: 20px;
+    background-color: #DB413A;
+    text-decoration: none;
+    color: #EEEEEE;
+    width: 35px;
+    height: 35px;
+    border-radius: 35px;
+    font-weight: 900;
+}
+
+.close:hover {
+    cursor: pointer;
+}
+
+.fade-out {
+    opacity: 0;
+	transition: 0.5s;
+}
+
+h4 {
+    font-weight: 100;
+}
+
+/* FIM DA ESTILIZAÇÃO DA LISTA DE ITENS*/
+
+/* INÍCIO DA ESTILIZAÇÃO DA POP-UP PARA INCLUIR PREÇO */
+
+.hidden {
+    display:none;
+}
+
+#overlay {
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #0000002a;
+}
+
+#price-window {
+    z-index: 2;
+    position: fixed;
+    top: 150px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    padding: 30px 60px;
+    background-color: #222831;
+    color: #EEEEEE;
+    border-radius: 10px;
+    display:flex;
+    flex-direction: column;
+    gap: 7px;
+    align-items: center;
+    box-shadow: 0 0 5px 5px #0000000b;
+}
+
+#close-price {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 25px;
+    height: 25px;
+    border-radius: 13px;
+    color: #EEEEEE;
+    background-color: #DB413A;
+}
+
+#close-price:hover {
+    cursor: pointer;
+}
+
+#item-price {
+    background-color: #393E46;
+    color: #EEEEEE;
+    border: 1px solid #EEEEEE;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+#item-price:focus {
+    outline: none;
+    box-shadow: 0 0 1px 1px #eeeeee56;
+}
+
+#price-button {
+    width: 85px;
+    height: 40px;
+    border-radius: 2px;
+    font-size: 15px;
+}
+
+#price-button:hover{
+    cursor: pointer;
+}
