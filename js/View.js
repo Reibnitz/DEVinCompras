@@ -1,8 +1,8 @@
 import { controller } from "./main.js"
 
 export class View {
-    addItem(item, id, status=false, price=0) {
-        const ul = document.querySelector('#output-container');
+    addItemToList(item, id, status=false, price=0) {
+        const ul = document.getElementById('output-container');
 
         const li = document.createElement('li');
         li.className = 'list';
@@ -21,9 +21,9 @@ export class View {
         text.innerText = item;
         li.appendChild(text);
 
-        if (price != 0) {
+        if (price != 0) { // Adiciona o preço ao lado do nome do item na lista, caso exista
             let priceText = document.createElement('h4');
-            priceText.innerHTML = ` - R$ ${parseFloat(price).toFixed(2)}`;
+            priceText.innerHTML = `&nbsp; R$ ${parseFloat(price).toFixed(2)}`;
             text.after(priceText);
         }
 
@@ -32,37 +32,38 @@ export class View {
         xButton.innerText = 'X';
         xButton.addEventListener('click',function(event) {
             event.preventDefault();
-            controller.remove(this.parentNode, id);
+            controller.removeItemFromList(this.parentNode, id);
         });
-        
         li.appendChild(xButton);
-        if (status == true) li.className = 'bought';
 
+        if (status == true) li.className = 'bought';
         ul.appendChild(li);
     }
 
-    removeItem(element) {
+    removeItemFromList(element) {
         element.classList.add('fade-out');
-        setTimeout(() => element.remove(), 500);
+        setTimeout(() => element.remove(), 500); // Timeout para alinhar com a animação de fade-out do CSS.
     }
 
     addPriceToItem(id, price) {
-        let target = document.querySelector(`[data-id="${id}"]`);
+        let itemNameText = document.querySelector(`[data-id="${id}"]`);
         let priceText = document.createElement('h4');
-        priceText.innerHTML = ` - R$ ${parseFloat(price).toFixed(2)}`;
-        target.after(priceText);
+        priceText.innerHTML = `&nbsp; R$ ${parseFloat(price).toFixed(2)}`;
+        itemNameText.after(priceText);
     }
 
     openPriceWindow(id, status) {
         let target = document.querySelector(`[data-id="${id}"]`);
                 
-        if (!status) {
-            target.parentNode.className = 'bought';
+        if (!status) { // Ocorre quando o item da lista está azul (não 'checado')
+            target.parentNode.className = 'bought'; // Parent é o 'li'
             this.createPriceWindowTemplate(id);
-            document.querySelector('#item-price').focus();
-        } else {
+            document.getElementById('item-price').focus();
+        } else { // Ocorre quando o item da lista está preto (já 'checado')
             target.parentNode.className = 'list';
             if (target.parentNode.childElementCount == 4) target.parentNode.children[2].remove();
+            // Remove o preço do item ao lado do nome apenas se houver esse item
+            // (sem o if, removeria o botão de fechar caso o preço não tenha sido adicionado)
         }
 
         controller.updateBoughtStatus(id, !status);
@@ -70,11 +71,11 @@ export class View {
 
     closePriceWindow() {
         document.getElementById('overlay').className = 'hidden';
-        document.getElementById('price-window').remove();
+        document.getElementById('overlay').innerHTML = '';
     }
 
     createPriceWindowTemplate(id) {
-        const container = document.querySelector('#overlay');
+        const container = document.getElementById('overlay');
         container.className = '';
 
         const form = document.createElement('form');
@@ -83,15 +84,14 @@ export class View {
             event.preventDefault();
             controller.addValue(id);
         });
-
-        container.appendChild(form);
         form.addEventListener('keydown',function(event) {
             if (event.key == 'Enter') {
                 event.preventDefault();
                 controller.addValue(id);
             }
         });
-
+        container.appendChild(form);
+        
         const xButton = document.createElement('button');
         xButton.id = 'close-price';
         xButton.innerText = 'X'
@@ -124,22 +124,22 @@ export class View {
     }
 
     createTotalBox(value) {
-        const container = document.querySelector('#price-container');
+        const container = document.getElementById('price-container');
 
-        if (value == 0) {
+        if (value == 0) { // Remove a TotalBox caso o valor total da compra desça para zero ao excluir itens da lista
             container.classList.add('slide-out');
             setTimeout(function() {
                 container.innerHTML = '';
             }, 300)
         } else {
-            if (container) container.innerHTML = '';
+            if (container) container.innerHTML = ''; // Remove o conteúdo para atualizar com o novo valor
 
             if (container.classList.contains('price-container')) {
                 this.createTotalBoxTemplate(value, container);
             } else {
                 setTimeout(this.createTotalBoxTemplate(value, container), 300);
                 container.className = 'price-container';
-            }
+            } // TimeOut necessário quando a TotalBox ainda não existe, para alinhar com a animação do CSS (slide-in da TotalBox)
         }
     }
 
@@ -161,7 +161,7 @@ export class View {
         const response = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=dpPu1kIHwa3fxoQiH9lzTfmUkMgEjtuS&q=${name}`);
         const json = await response.json();
 
-        let randomNumber = Math.floor((Math.random() * 10) + 1);
+        let randomNumber = Math.floor((Math.random() * json.data.length));
 
         const gif = document.createElement('img');
         gif.src = json.data[randomNumber].images.original.url;

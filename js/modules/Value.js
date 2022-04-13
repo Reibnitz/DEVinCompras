@@ -13,5 +13,4 @@ export class Value {
             return 0;
         }
     }
-
 }

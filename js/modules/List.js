@@ -33,14 +33,12 @@ export class List {
 
     
     updatePrice(id) {
-        let price = parseFloat(document.querySelector('#item-price').value);
-        price = isNaN(price) ? 0 : price;
+        let price = parseFloat(document.getElementById('item-price').value);
+        price = isNaN(price) ? 0 : price; // Se o preço não for declarado pelo usuário, define como zero
         
         for (let x of this.itemList) {
             if (x.id == id) x.price = price;
         }
-        
-        return price;
     }
     
     setZeroPrice(id) {
