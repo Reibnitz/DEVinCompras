@@ -71,4 +71,8 @@ export class List {
     getPrice(id) {
         return this.itemList.filter(element => element.id == id)[0].price;
     }
+
+    getName(id) {
+        return this.itemList.filter(element => element.id == id)[0].name;
+    }
 }

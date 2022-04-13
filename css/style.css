@@ -301,3 +301,27 @@ h4 {
 #price-button:hover{
     cursor: pointer;
 }
+
+/* FIM DA ESTILIZAÇÃO DA POP-UP PARA INCLUIR PREÇO */
+
+/* INÍCIO DA ESTILIZAÇÃO DO GIF */
+#giphy-container {
+    z-index: 1;
+    position: fixed;
+    top: 150px;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+#giphy {
+    max-width: 300px;
+    max-height: 300px;
+    animation-delay: 2s;
+    animation-duration: 1s;
+    animation-name: fade-out;
+}
+
+@keyframes fade-out {
+    100% {opacity: 0;}
+}
+/* FIM DA ESTILIZAÇÃO DO GIF */

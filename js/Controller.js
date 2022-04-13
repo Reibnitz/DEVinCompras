@@ -48,6 +48,7 @@ export class Controller {
 
     openPriceWindow(id) {
         let boughtStatus = this.list.getBoughtStatus(id);
+
         this.item.openPriceWindow(id, boughtStatus);
         
         if (boughtStatus) {
@@ -57,13 +58,20 @@ export class Controller {
         }
     }
 
+    closePriceWindow() {
+        this.item.closePriceWindow();
+    }
+
     addValue(id) {
         let price = this.list.updatePrice(id);
+        let name = this.list.getName(id);
+        
         if(price != 0) {
             this.value.sumTotal(this.list.getItemList());
             this.storage.update(this.list.getItemList());
             this.item.addPriceToItem(id, this.list.getPrice(id));
             this.item.createTotalBox(this.value.sumTotal(this.list.getItemList()));
+            this.item.generateGif(name);
             document.querySelector('#overlay').className = 'hidden';
             document.querySelector('#overlay').innerHTML = '';
         } else {

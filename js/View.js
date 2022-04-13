@@ -53,7 +53,7 @@ export class View {
         target.after(priceText);
     }
 
-    openPriceWindow(id,status) {
+    openPriceWindow(id, status) {
         let target = document.querySelector(`[data-id="${id}"]`);
                 
         if (!status) {
@@ -97,9 +97,9 @@ export class View {
         xButton.innerText = 'X'
         xButton.addEventListener('click', function(event) {
             event.preventDefault();
-            this.closePriceWindow();
+            controller.closePriceWindow();
         });
-        form.appendChild(xButton)
+        form.appendChild(xButton);
 
         const label = document.createElement('label');
         label.setAttribute('for', 'item-price');
@@ -153,5 +153,20 @@ export class View {
         container.appendChild(text);
 
         container.className = 'price-container';
+    }
+
+    async generateGif(name) {
+        const div = document.getElementById('giphy-container');
+
+        const response = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=dpPu1kIHwa3fxoQiH9lzTfmUkMgEjtuS&q=${name}`);
+        const json = await response.json();
+
+        let randomNumber = Math.floor((Math.random() * 10) + 1);
+
+        const gif = document.createElement('img');
+        gif.src = json.data[randomNumber].images.original.url;
+        gif.id = 'giphy';
+        div.appendChild(gif);
+        setTimeout(function() {gif.remove()}, 3000);
     }
 }
