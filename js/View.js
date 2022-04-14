@@ -112,7 +112,8 @@ export class View {
             'name': 'item-price',
             'id': 'item-price',
             'min': '0',
-            'step': '0.01'
+            'step': '0.01',
+            'placeholder': 'Insira o valor do item'
         });
         form.appendChild(input);
         

@@ -28,11 +28,13 @@ export class Controller {
     }
 
     defineSubmitFunction() {
-        document.querySelector('#input-container').addEventListener('submit',(event) => this.addItemToList(event));
+        document.querySelector('#input-container').addEventListener('submit',(event) => {
+            event.preventDefault();
+            this.addItemToList(event)
+        });
     }
 
-    addItemToList(event) {
-        event.preventDefault();
+    addItemToList() {
         let name = this.inputItem.value;
 
         if (name.length > 0) {
