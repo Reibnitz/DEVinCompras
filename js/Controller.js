@@ -1,7 +1,7 @@
 import { View } from "./View.js";
-import { List } from "./modules/List.js";
-import { Storage } from "./modules/Storage.js";
-import { Value } from "./modules/Value.js";
+import { List } from "./models/List.js";
+import { Storage } from "./models/Storage.js";
+import { Value } from "./models/Value.js";
 
 export class Controller {
     
